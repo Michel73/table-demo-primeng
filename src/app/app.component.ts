@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { LazyLoadEvent } from 'primeng/api';
 
+import { Page } from './model/page';
 import { User, UserService } from './user.service';
 
 @Component({
@@ -10,10 +12,22 @@ import { User, UserService } from './user.service';
 export class AppComponent implements OnInit {
   title = 'td-primeng';
   users: User[];
+  loading = false;
 
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.userService.model.subscribe(users => this.users = users);
+    // this.userService.model.subscribe(users => this.users = users);
+  }
+
+  loadLazy(event: LazyLoadEvent) {
+    this.loading = true;
+    const page = new Page();
+    page.pageNumber = event.first / event.rows + 1;
+    page.size = event.rows;
+    this.userService.getResults(page).subscribe(pagedData => {
+      this.users = pagedData.data;
+      this.loading = false;
+    });
   }
 }

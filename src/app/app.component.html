@@ -4,7 +4,8 @@
     Welcome to {{ title }}!
   </h1>
 </div>
-<p-table [value]="users" [paginator]="true" [rows]="90" [scrollable]="true" scrollHeight="70vh">
+<p-table [value]="users" [paginator]="true" [rows]="90" [scrollable]="true" scrollHeight="70vh" [lazy]="true"
+  [totalRecords]="1000" [loading]="loading" (onLazyLoad)="loadLazy($event)">
   <ng-template pTemplate="header">
     <tr>
       <th>Id</th>
