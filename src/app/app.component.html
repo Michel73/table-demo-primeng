@@ -5,21 +5,51 @@
   </h1>
 </div>
 <p-table [value]="users" [paginator]="true" [rows]="90" [scrollable]="true" scrollHeight="70vh" [lazy]="true"
-  [totalRecords]="1000" [loading]="loading" (onLazyLoad)="loadLazy($event)">
+  [totalRecords]="1000" [loading]="loading" (onLazyLoad)="loadLazy($event)" dataKey="id" [columns]="columns">
   <ng-template pTemplate="header">
     <tr>
+      <th style="width: 3em"></th>
       <th>Id</th>
       <th>Firstname</th>
       <th>Lastname</th>
       <th>Email</th>
     </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-user>
+  <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns">
     <tr>
-      <td>{{user.id}}</td>
-      <td>{{user.firstName}}</td>
-      <td>{{user.lastName}}</td>
-      <td>{{user.email}}</td>
+      <td style="width: 3em">
+        <a href="#" [pRowToggler]="rowData">
+          <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+        </a>
+      </td>
+      <td>{{rowData.id}}</td>
+      <td>{{rowData.firstName}}</td>
+      <td>{{rowData.lastName}}</td>
+      <td>{{rowData.email}}</td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
+    <tr>
+      <td [attr.colspan]="columns.length + 2">
+        <div class="ui-g ui-fluid" style="font-size:16px;padding:20px">
+          <div class="ui-g-12 ui-md-9">
+            <div class="ui-g">
+              <div class="ui-g-12">
+                <b>Id:</b> {{rowData.id}}
+              </div>
+              <div class="ui-g-12">
+                <b>Firstname:</b> {{rowData.firstName}}
+              </div>
+              <div class="ui-g-12">
+                <b>Lastname:</b> {{rowData.lastName}}
+              </div>
+              <div class="ui-g-12">
+                <b>Email:</b> {{rowData.email}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </td>
     </tr>
   </ng-template>
 </p-table>
