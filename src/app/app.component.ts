@@ -35,6 +35,13 @@ export class AppComponent implements OnInit {
     // this.userService.model.subscribe(users => this.users = users);
   }
 
+  lazyExpand(rowData) {
+    console.log('Rowdata: ', rowData);
+    setTimeout(() => {
+      rowData.data.spitzname = 'Micky Mouse';
+    }, 500);
+  }
+
   loadLazy(event: LazyLoadEvent) {
     this.loading = true;
     const page = new Page();

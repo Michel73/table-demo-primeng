@@ -5,7 +5,8 @@
   </h1>
 </div>
 <p-table [value]="users" [paginator]="true" [rows]="90" [scrollable]="true" scrollHeight="70vh" [lazy]="true"
-  [totalRecords]="1000" [loading]="loading" (onLazyLoad)="loadLazy($event)" dataKey="id" [columns]="columns">
+  [totalRecords]="1000" [loading]="loading" (onLazyLoad)="loadLazy($event)" dataKey="id" [columns]="columns"
+  (onRowExpand)="lazyExpand($event)">
   <ng-template pTemplate="header">
     <tr>
       <th style="width: 3em"></th>
@@ -29,6 +30,7 @@
     </tr>
   </ng-template>
   <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
+    <!-- {{lazyExpand(rowData)}} -->
     <tr>
       <td [attr.colspan]="columns.length + 2">
         <div class="ui-g ui-fluid" style="font-size:16px;padding:20px">
@@ -45,6 +47,9 @@
               </div>
               <div class="ui-g-12">
                 <b>Email:</b> {{rowData.email}}
+              </div>
+              <div class="ui-g-12">
+                <b>Spitzname:</b> {{rowData.spitzname}}
               </div>
             </div>
           </div>
