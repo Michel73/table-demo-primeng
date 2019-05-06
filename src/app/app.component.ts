@@ -28,6 +28,7 @@ export class AppComponent implements OnInit {
   users: User[];
   loading = false;
   columns = ['firstName', 'lastName', 'email'];
+  expandedRows = {};
 
   constructor(private userService: UserService) { }
 
@@ -35,10 +36,10 @@ export class AppComponent implements OnInit {
     // this.userService.model.subscribe(users => this.users = users);
   }
 
-  lazyExpand(rowData) {
-    console.log('Rowdata: ', rowData);
+  lazyExpand(user) {
+    console.log('Rowdata: ', user);
     setTimeout(() => {
-      rowData.data.spitzname = 'Micky Mouse';
+      user.spitzname = 'Micky Mouse';
     }, 500);
   }
 
@@ -49,6 +50,13 @@ export class AppComponent implements OnInit {
     page.size = event.rows;
     this.userService.getResults(page).subscribe(pagedData => {
       this.users = pagedData.data;
+      this.users.forEach((user) => {
+        if (this.expandedRows[user.id]) {
+          // tslint:disable-next-line
+          // user['spitzname'] = 'Donald Duck';
+          this.lazyExpand(user);
+        }
+      });
       this.loading = false;
     });
   }
