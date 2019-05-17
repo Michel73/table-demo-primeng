@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 
 import { Page } from './model/page';
 import { PagedData } from './model/paged-data';
+import { SortObject } from './model/sort-object';
 
 export interface User {
   id: number;
@@ -30,8 +31,21 @@ export class UserService {
     });
   }
 
-  public search(page, limit): Observable<User[]> {
-    return this.http.get(`http://localhost:3000/users?_page=${page}&_limit=${limit}`).pipe(map((users: User[]) => users));
+  public search(page: number, limit: number, sorting: SortObject[]): Observable<User[]> {
+    let sortValues: string;
+    let sortOrders: string;
+
+    sorting.forEach(sortCriteria => {
+      sortValues = sortValues ? `,${sortCriteria.value}` : sortCriteria.value;
+      sortOrders = sortOrders ? `,${sortCriteria.ascending ? 'asc' : 'desc'}` : sortCriteria.ascending ? 'asc' : 'desc';
+    });
+
+    const url = `http://localhost:3000/users?_page=${page}&_limit=${limit}&_sort=${sortValues}&_order=${sortOrders}`;
+
+    console.log(`Backend request: ${url}`);
+    return this.http.
+      get(url).
+      pipe(map((users: User[]) => users));
   }
 
   public getUsers(): User[] {
@@ -68,7 +82,7 @@ export class UserService {
     // const start = page.pageNumber * page.size;
     // const end = Math.min((start + page.size), page.totalElements);
     console.log('pageNumber: ', page.pageNumber, 'size: ', page.size);
-    return this.search(page.pageNumber, page.size).pipe(map(users => {
+    return this.search(page.pageNumber, page.size, page.sorting).pipe(map(users => {
       for (const user of users) {
         pagedData.data.push(user);
       }

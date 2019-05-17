@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { LazyLoadEvent } from 'primeng/api';
 
 import { Page } from './model/page';
+import { SortObject } from './model/sort-object';
 import { User, UserService } from './user.service';
 
 @Component({
@@ -45,15 +46,13 @@ export class AppComponent implements OnInit {
 
   loadLazy(event: LazyLoadEvent) {
     this.loading = true;
-    const page = new Page();
+    const page = new Page([new SortObject('id', event.sortOrder === 1 ? true : false)]);
     page.pageNumber = event.first / event.rows + 1;
     page.size = event.rows;
     this.userService.getResults(page).subscribe(pagedData => {
       this.users = pagedData.data;
       this.users.forEach((user) => {
         if (this.expandedRows[user.id]) {
-          // tslint:disable-next-line
-          // user['spitzname'] = 'Donald Duck';
           this.lazyExpand(user);
         }
       });
