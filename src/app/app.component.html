@@ -4,9 +4,9 @@
     Welcome to {{ title }}!
   </h1>
 </div>
-<p-table [value]="users" [paginator]="true" [rows]="90" [scrollable]="true" scrollHeight="70vh" [lazy]="true"
-  [totalRecords]="1000" [loading]="loading" (onLazyLoad)="loadLazy($event)" dataKey="id" [columns]="columns"
-  [expandedRowKeys]="expandedRows">
+<p-table sortMode="multiple" [multiSortMeta]="multiSortMeta" [value]="users" [paginator]="true" [rows]="90"
+  [scrollable]="true" scrollHeight="70vh" [lazy]="true" [totalRecords]="1000" [loading]="loading"
+  (onLazyLoad)="loadLazy($event)" dataKey="id" [columns]="columns" [expandedRowKeys]="expandedRows">
   <ng-template pTemplate="header">
     <tr>
       <th style="width: 3em"></th>
@@ -18,10 +18,11 @@
         Firstname
         <p-sortIcon [field]="'firstName'"></p-sortIcon>
       </th>
-      <th [pSortableColumn]="'lastName'">
-        Lastname
-        <p-sortIcon [field]="'lastName'"></p-sortIcon>
-      </th>
+      <!-- <th [pSortableColumn]="'lastName'"> -->
+      <!-- Lastname -->
+      <!-- <p-sortIcon [field]="'lastName'"></p-sortIcon> -->
+      <!-- </th> -->
+      <th>Lastname</th>
       <th [pSortableColumn]="'email'">
         Email
         <p-sortIcon [field]="'email'"></p-sortIcon>

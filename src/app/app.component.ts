@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { LazyLoadEvent } from 'primeng/api';
+import { LazyLoadEvent, SortMeta } from 'primeng/api';
 
 import { Page } from './model/page';
 import { SortObject } from './model/sort-object';
@@ -30,11 +30,13 @@ export class AppComponent implements OnInit {
   loading = false;
   columns = ['firstName', 'lastName', 'email'];
   expandedRows = {};
+  multiSortMeta = new Array<SortMeta>();
 
   constructor(private userService: UserService) { }
 
   ngOnInit() {
     // this.userService.model.subscribe(users => this.users = users);
+    // this.multiSortMeta.push({ field: 'lastName', order: -1 });
   }
 
   lazyExpand(user) {
@@ -46,7 +48,16 @@ export class AppComponent implements OnInit {
 
   loadLazy(event: LazyLoadEvent) {
     this.loading = true;
-    const page = new Page([new SortObject(event.sortField, event.sortOrder === 1 ? true : false)]);
+    const sortCriterias = new Array<SortObject>();
+    if (event.multiSortMeta) {
+      event.multiSortMeta.forEach(element => {
+        sortCriterias.push(new SortObject(element.field, element.order === 1 ? true : false));
+      });
+    } else {
+      sortCriterias.push(new SortObject('id', true));
+    }
+    sortCriterias.push(new SortObject('lastName', false));
+    const page = new Page(sortCriterias);
     page.pageNumber = event.first / event.rows + 1;
     page.size = event.rows;
     this.userService.getResults(page).subscribe(pagedData => {

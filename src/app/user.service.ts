@@ -36,8 +36,8 @@ export class UserService {
     let sortOrders: string;
 
     sorting.forEach(sortCriteria => {
-      sortValues = sortValues ? `,${sortCriteria.value}` : sortCriteria.value;
-      sortOrders = sortOrders ? `,${sortCriteria.ascending ? 'asc' : 'desc'}` : sortCriteria.ascending ? 'asc' : 'desc';
+      sortValues = sortValues ? `${sortValues},${sortCriteria.value}` : sortCriteria.value;
+      sortOrders = sortOrders ? `${sortOrders},${sortCriteria.ascending ? 'asc' : 'desc'}` : sortCriteria.ascending ? 'asc' : 'desc';
     });
 
     const url = `http://localhost:3000/users?_page=${page}&_limit=${limit}&_sort=${sortValues}&_order=${sortOrders}`;
