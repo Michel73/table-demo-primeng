@@ -46,7 +46,7 @@ export class AppComponent implements OnInit {
 
   loadLazy(event: LazyLoadEvent) {
     this.loading = true;
-    const page = new Page([new SortObject('id', event.sortOrder === 1 ? true : false)]);
+    const page = new Page([new SortObject(event.sortField, event.sortOrder === 1 ? true : false)]);
     page.pageNumber = event.first / event.rows + 1;
     page.size = event.rows;
     this.userService.getResults(page).subscribe(pagedData => {
