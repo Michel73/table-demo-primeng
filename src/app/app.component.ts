@@ -60,6 +60,7 @@ export class AppComponent implements OnInit {
     const page = new Page(sortCriterias);
     page.pageNumber = event.first / event.rows + 1;
     page.size = event.rows;
+    page.filter = event.filters.global ? event.filters.global.value : '';
     this.userService.getResults(page).subscribe(pagedData => {
       this.users = pagedData.data;
       this.users.forEach((user) => {

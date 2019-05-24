@@ -13,6 +13,7 @@ export class Page {
   // The current page number
   pageNumber = -1;
   sorting: SortObject[];
+  filter: any;
 
   constructor(sorting: SortObject[]) {
     this.sorting = sorting;
