@@ -28,11 +28,38 @@ export class AppComponent implements OnInit {
   title = 'td-primeng';
   users: User[];
   loading = false;
-  columns = [
+  cols = [
     {
       field: 'id',
       header: 'Id'
     },
+    {
+      field: 'firstName',
+      header: 'Firstname'
+    },
+    {
+      field: 'lastName',
+      header: 'Lastname'
+    },
+    {
+      field: 'email',
+      header: 'Email'
+    }
+  ];
+
+  frozenCols = [
+    // {
+    // field: 'expander',
+    // header: ''
+    // },
+    {
+      field: 'id',
+      header: 'Id'
+    }
+  ];
+
+
+  scrollableCols = [
     {
       field: 'firstName',
       header: 'Firstname'
@@ -52,6 +79,8 @@ export class AppComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit() {
+    this.frozenCols.type = 'frozen';
+    this.scrollableCols.type = 'scrollable';
     // this.userService.model.subscribe(users => this.users = users);
     // this.multiSortMeta.push({ field: 'lastName', order: -1 });
   }
