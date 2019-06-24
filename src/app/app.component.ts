@@ -79,8 +79,10 @@ export class AppComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.frozenCols.type = 'frozen';
-    this.scrollableCols.type = 'scrollable';
+    // tslint:disable-next-line:no-string-literal
+    this.frozenCols['type'] = 'frozen';
+    // tslint:disable-next-line:no-string-literal
+    this.scrollableCols['type'] = 'scrollable';
     // this.userService.model.subscribe(users => this.users = users);
     // this.multiSortMeta.push({ field: 'lastName', order: -1 });
   }

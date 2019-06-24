@@ -39,7 +39,7 @@ export class UserService {
       sortValues = sortValues ? `${sortValues},${sortCriteria.value}` : sortCriteria.value;
       sortOrders = sortOrders ? `${sortOrders},${sortCriteria.ascending ? 'asc' : 'desc'}` : sortCriteria.ascending ? 'asc' : 'desc';
     });
-    filter = filter ? `&id=${filter}` : '';
+    filter = filter ? `&q=${filter}` : '';
     // tslint:disable-next-line:max-line-length
     const url = `http://localhost:3000/users?_page=${page}&_limit=${limit}&_sort=${sortValues}&_order=${sortOrders}${filter}`;
 

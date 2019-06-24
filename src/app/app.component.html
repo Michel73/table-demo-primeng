@@ -42,7 +42,6 @@
   <ng-template pTemplate="body" let-user let-expanded="expanded" let-columns="columns">
     <tr>
       <td *ngIf="columns.type === 'frozen'" style="width: 3em; height: 35px;">
-        <!-- <td style="width: 3em"> -->
         <a href="#" [pRowToggler]="user">
           <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'" (click)="lazyExpand(user)"></i>
         </a>
@@ -54,7 +53,7 @@
   </ng-template>
   <ng-template pTemplate="rowexpansion" let-user let-columns="columns">
     <tr>
-      <td [attr.colspan]="columns.length + 2" *ngIf="columns.type === 'frozen'">
+      <td [attr.colspan]="columns.length + 1" *ngIf="columns.type === 'frozen'">
         <div class="ui-g ui-fluid" style="font-size:16px;padding:20px;height: 220px;">
           <div class="ui-g-12 ui-md-9">
             <div class="ui-g">
@@ -78,7 +77,7 @@
         </div>
 
       </td>
-      <td [attr.colspan]="columns.length + 2" *ngIf="columns.type === 'scrollable'">
+      <td [attr.colspan]="columns.length" *ngIf="columns.type === 'scrollable'">
         <div class="ui-g ui-fluid" style="font-size:16px;padding:20px;height: 220px;">
           <div class="ui-g-12 ui-md-9">
             <div class="ui-g">
