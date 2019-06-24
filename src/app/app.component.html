@@ -32,12 +32,12 @@
         <p-sortIcon [field]="col.field"></p-sortIcon>
       </th>
     </tr>
-    <!-- <tr> -->
-    <!-- <th style="width: 3em"></th> -->
-    <!-- <th *ngFor="let col of columns"> -->
-    <!-- <input pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')"> -->
-    <!-- </th> -->
-    <!-- </tr> -->
+    <tr>
+      <th *ngIf="columns.type === 'frozen'" style="width: 3em"></th>
+      <th *ngFor="let col of columns">
+        <input pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
+      </th>
+    </tr>
   </ng-template>
   <ng-template pTemplate="body" let-user let-expanded="expanded" let-columns="columns">
     <tr>

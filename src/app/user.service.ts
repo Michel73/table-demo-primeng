@@ -1,3 +1,4 @@
+import { KeyValue } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -31,7 +32,13 @@ export class UserService {
     });
   }
 
-  public search(page: number, limit: number, sorting: SortObject[], filter: string): Observable<User[]> {
+  public search(
+    page: number,
+    limit: number,
+    sorting: SortObject[],
+    globalFilter: string,
+    singleFilter: KeyValue<string, string>[]
+  ): Observable<User[]> {
     let sortValues: string;
     let sortOrders: string;
 
@@ -39,9 +46,15 @@ export class UserService {
       sortValues = sortValues ? `${sortValues},${sortCriteria.value}` : sortCriteria.value;
       sortOrders = sortOrders ? `${sortOrders},${sortCriteria.ascending ? 'asc' : 'desc'}` : sortCriteria.ascending ? 'asc' : 'desc';
     });
-    filter = filter ? `&q=${filter}` : '';
+    globalFilter = globalFilter ? `&q=${globalFilter}` : '';
+    // const filter = singleFilter ? `&${singleFilter.key}_like=${singleFilter.value}` : '';
+    let singleFilters = '';
+
+    for (const filter of singleFilter) {
+      singleFilters = `${singleFilters}&${filter.key}_like=${filter.value}`;
+    }
     // tslint:disable-next-line:max-line-length
-    const url = `http://localhost:3000/users?_page=${page}&_limit=${limit}&_sort=${sortValues}&_order=${sortOrders}${filter}`;
+    const url = `http://localhost:3000/users?_page=${page}&_limit=${limit}&_sort=${sortValues}&_order=${sortOrders}${globalFilter}${singleFilters}`;
 
     console.log(`Backend request: ${url}`);
     return this.http.
@@ -83,7 +96,7 @@ export class UserService {
     // const start = page.pageNumber * page.size;
     // const end = Math.min((start + page.size), page.totalElements);
     console.log('pageNumber: ', page.pageNumber, 'size: ', page.size);
-    return this.search(page.pageNumber, page.size, page.sorting, page.filter).pipe(map(users => {
+    return this.search(page.pageNumber, page.size, page.sorting, page.globalFilter, page.filter).pipe(map(users => {
       for (const user of users) {
         pagedData.data.push(user);
       }
