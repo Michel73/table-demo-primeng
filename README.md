@@ -20,7 +20,7 @@ Following features are included:
 
 ## How to start
 
-- `npm i`
+- `npm i` (only once)
 - `npm start` (Starts also the backend)
 
 ## How to stop
