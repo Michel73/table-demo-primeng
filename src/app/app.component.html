@@ -1,4 +1,3 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <h1>
     Welcome to {{ title }}!
@@ -22,38 +21,15 @@
         {{col.header}}
         <p-sortIcon [field]="col.field"></p-sortIcon>
       </th>
-
-
-
-      <!-- <th [pSortableColumn]="'id'" pReorderableColumn> -->
-      <!-- Id -->
-      <!-- <p-sortIcon [field]="'id'"></p-sortIcon> -->
-      <!-- </th> -->
-      <!-- <th [pSortableColumn]="'firstName'" pReorderableColumn> -->
-      <!-- Firstname -->
-      <!-- <p-sortIcon [field]="'firstName'"></p-sortIcon> -->
-      <!-- </th> -->
-      <!-- <th pReorderableColumn>Lastname</th> -->
-      <!-- <th [pSortableColumn]="'email'" pReorderableColumn> -->
-      <!-- Email -->
-      <!-- <p-sortIcon [field]="'email'"></p-sortIcon> -->
-      <!-- </th> -->
     </tr>
     <tr>
       <th style="width: 3em"></th>
       <th *ngFor="let col of columns">
         <input pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
       </th>
-      <!-- <th> -->
-      <!-- <input pInputText type="text" (input)="dt.filter($event.target.value, 'firstName', 'contains')"> -->
-      <!-- </th> -->
-      <!-- <th></th> -->
-      <!-- <th></th> -->
-
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-user let-expanded="expanded" let-columns="columns">
-    <!-- {{ expanded ? lazyExpand(user) : ""}} -->
     <tr>
       <td style="width: 3em">
         <a href="#" [pRowToggler]="user">
@@ -63,10 +39,6 @@
       <td *ngFor="let col of columns">
         {{user[col.field]}}
       </td>
-      <!-- <td>{{user.id}}</td> -->
-      <!-- <td>{{user.firstName}}</td> -->
-      <!-- <td>{{user.lastName}}</td> -->
-      <!-- <td>{{user.email}}</td> -->
     </tr>
   </ng-template>
   <ng-template pTemplate="rowexpansion" let-user let-columns="columns">
