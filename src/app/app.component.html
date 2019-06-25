@@ -10,8 +10,13 @@
 <p-table #dt sortMode="multiple" [multiSortMeta]="multiSortMeta" [value]="users" [paginator]="true" [rows]="90"
   [scrollable]="true" scrollHeight="500px" frozenWidth="300px" [lazy]="true" [totalRecords]="1000" [loading]="loading"
   (onLazyLoad)="loadLazy($event)" (onColReorder)="colReorder($event)" dataKey="id" [expandedRowKeys]="expandedRows"
-  [reorderableColumns]="true" [columns]="scrollableCols" [frozenColumns]="frozenCols">
+  [reorderableColumns]="true" [columns]="selectedColumns" [frozenColumns]="frozenCols">
   <ng-template pTemplate="caption">
+    <div style="text-align:left">
+      <p-multiSelect [options]="scrollableCols" [(ngModel)]="selectedColumns" optionLabel="header"
+        selectedItemsLabel="{0} columns selected" [style]="{minWidth: '200px'}" defaultLabel="Choose Columns">
+      </p-multiSelect>
+    </div>
     <div style="text-align: center">
       <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
       <input type="text" pInputText size="50" placeholder="Global Filter"
