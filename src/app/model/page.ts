@@ -1,3 +1,5 @@
+import { KeyValue } from '@angular/common';
+
 import { SortObject } from './sort-object';
 
 /**
@@ -13,7 +15,8 @@ export class Page {
   // The current page number
   pageNumber = -1;
   sorting: SortObject[];
-  filter: any;
+  globalFilter: any;
+  filter: KeyValue<string, string>[];
 
   constructor(sorting: SortObject[]) {
     this.sorting = sorting;

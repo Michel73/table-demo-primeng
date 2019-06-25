@@ -1,4 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { KeyValue } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { LazyLoadEvent, SortMeta } from 'primeng/api';
 
@@ -112,7 +113,20 @@ export class AppComponent implements OnInit {
     const page = new Page(sortCriterias);
     page.pageNumber = event.first / event.rows + 1;
     page.size = event.rows;
-    page.filter = event.filters.global ? event.filters.global.value : '';
+    page.globalFilter = event.filters.global ? event.filters.global.value : '';
+    const filters = Object.keys(event.filters);
+    const singleFilters: KeyValue<string, string>[] = [];
+    for (const filter of filters) {
+      if (filter !== 'global') {
+        singleFilters.push({ key: filter, value: event.filters[filter].value });
+      }
+    }
+    page.filter = singleFilters;
+    // page.filter = {
+    // key: event.filters,
+    // value: event.filters
+    //  }
+
     this.userService.getResults(page).subscribe(pagedData => {
       this.users = pagedData.data;
       this.users.forEach((user) => {

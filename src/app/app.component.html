@@ -32,7 +32,7 @@
       </th>
     </tr>
     <tr>
-      <th style="width: 3em"></th>
+      <th *ngIf="columns.type === 'frozen'" style="width: 3em"></th>
       <th *ngFor="let col of columns">
         <input pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
       </th>
