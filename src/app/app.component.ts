@@ -28,7 +28,24 @@ export class AppComponent implements OnInit {
   title = 'td-primeng';
   users: User[];
   loading = false;
-  columns = ['firstName', 'lastName', 'email'];
+  columns = [
+    {
+      field: 'id',
+      header: 'Id'
+    },
+    {
+      field: 'firstName',
+      header: 'Firstname'
+    },
+    {
+      field: 'lastName',
+      header: 'Lastname'
+    },
+    {
+      field: 'email',
+      header: 'Email'
+    }
+  ];
   expandedRows = {};
   multiSortMeta = new Array<SortMeta>();
 
@@ -44,6 +61,10 @@ export class AppComponent implements OnInit {
     setTimeout(() => {
       user.spitzname = 'Micky Mouse';
     }, 500);
+  }
+
+  colReorder(event: any) {
+    console.log('colReorder called with event: ', event);
   }
 
   loadLazy(event: LazyLoadEvent) {
