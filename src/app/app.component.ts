@@ -74,6 +74,9 @@ export class AppComponent implements OnInit {
       header: 'Email'
     }
   ];
+  // tslint:disable-next-line
+  _selectedColumns: any;
+  // selectedColumns = this.scrollableCols;
   expandedRows = {};
   multiSortMeta = new Array<SortMeta>();
 
@@ -84,8 +87,19 @@ export class AppComponent implements OnInit {
     this.frozenCols['type'] = 'frozen';
     // tslint:disable-next-line:no-string-literal
     this.scrollableCols['type'] = 'scrollable';
+    this._selectedColumns = this.scrollableCols;
     // this.userService.model.subscribe(users => this.users = users);
     // this.multiSortMeta.push({ field: 'lastName', order: -1 });
+  }
+
+  set selectedColumns(cols: any) {
+    this._selectedColumns = cols;
+    // tslint:disable-next-line:no-string-literal
+    this._selectedColumns['type'] = 'scrollable';
+  }
+
+  get selectedColumns() {
+    return this._selectedColumns;
   }
 
   lazyExpand(user) {
