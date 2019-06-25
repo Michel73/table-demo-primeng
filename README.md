@@ -2,26 +2,29 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.0.
 
-## Development server
+It's a demo project to try to combine several features from PrimeNG `p-table`.
+As backend a `json-server` is used.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Following features are included:
 
-## Code scaffolding
+- scrolling (horizontal and vertical, but vertical all columns except id)
+- paging
+- fixed columns (id column)
+- resizable colums (except id column)
+- selectable columns (except id column)
+- reorderable columns (except id column)
+- sortable columns
+- global filter
+- single filter
+- row expansion
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## How to start
 
-## Build
+- `npm i`
+- `npm start` (Starts also the backend)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## How to stop
 
-## Running unit tests
+- Just type `ctrl c` in terminal
+- `npm run stop-testdb` to stop the backend
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
