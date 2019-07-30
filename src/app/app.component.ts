@@ -80,9 +80,10 @@ export class AppComponent implements OnInit {
   expandedRows = {};
   multiSortMeta = new Array<SortMeta>();
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService) {}
 
   ngOnInit() {
+    this.loading = true;
     // tslint:disable-next-line:no-string-literal
     this.frozenCols['type'] = 'frozen';
     // tslint:disable-next-line:no-string-literal
@@ -132,7 +133,7 @@ export class AppComponent implements OnInit {
     const singleFilters: KeyValue<string, string>[] = [];
     for (const filter of filters) {
       if (filter !== 'global') {
-        singleFilters.push({ key: filter, value: event.filters[filter].value });
+        singleFilters.push({key: filter, value: event.filters[filter].value});
       }
     }
     page.filter = singleFilters;
