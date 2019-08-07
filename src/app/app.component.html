@@ -9,7 +9,8 @@
 <p-table #dt sortMode="multiple" [multiSortMeta]="multiSortMeta" [value]="users" [paginator]="true" [rows]="90"
   [scrollable]="true" scrollHeight="500px" frozenWidth="300px" [lazy]="true" [totalRecords]="1000" [loading]="loading"
   (onLazyLoad)="loadLazy($event)" (onColReorder)="colReorder($event)" dataKey="id" [expandedRowKeys]="expandedRows"
-  [reorderableColumns]="true" [columns]="selectedColumns" [frozenColumns]="frozenCols" [resizableColumns]="true">
+  [reorderableColumns]="true" [columns]="selectedColumns" [frozenColumns]="frozenCols" [paginatorPosition]="'bottom'"
+  [resizableColumns]="true">
   <ng-template pTemplate="caption">
     <div style="text-align:left">
       <p-multiSelect [options]="scrollableCols" [(ngModel)]="selectedColumns" optionLabel="header"

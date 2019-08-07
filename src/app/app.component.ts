@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { KeyValue } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { LazyLoadEvent, SortMeta } from 'primeng/api';
 
 import { Page } from './model/page';
@@ -11,6 +11,7 @@ import { User, UserService } from './user.service';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
+  encapsulation: ViewEncapsulation.None,
   animations: [
     trigger('rowExpansionTrigger', [
       state('void', style({
