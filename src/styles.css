@@ -1,1 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+html, body {
+  height: 100%;
+  margin: 0px
+}
+
+.body-content {
+  height: 100%;
+  /* position: relative; */
+  border: solid 1px;
+  display: flex;
+  flex-direction: column;
+}
+
+.table-parent {
+  /* position: absolute; */
+  /* bottom: 0; */
+  border: solid 1px;
+  width: 100%;
+  flex-grow: 1;
+}

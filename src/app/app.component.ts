@@ -103,6 +103,10 @@ export class AppComponent implements OnInit {
     return this._selectedColumns;
   }
 
+  clearGlobalFilter() {
+    console.log('Clear global filter clicked')
+  }
+
   lazyExpand(user) {
     console.log('Rowdata: ', user);
     setTimeout(() => {
